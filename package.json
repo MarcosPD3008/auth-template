@@ -1,7 +1,7 @@
 {
-  "name": "template_mongodb",
+  "name": "template_mongodb_with_auth",
   "version": "1.0.0",
-  "description": "template for nodejs project with mongodb",
+  "description": "template for nodejs project with mongodb and auth controller",
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
