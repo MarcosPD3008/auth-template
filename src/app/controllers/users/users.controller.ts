@@ -18,18 +18,16 @@ export class UsersController extends BaseController<User>{
         try{
             let { email, password } = req.body;
             if(!email || !password){
-                res.status(400).json({
+                return res.status(400).json({
                     error: "email and password are required"
                 })
-                return;
             }
 
             let user = await this.service.findByEmail(email);
             if(!user){
-                res.status(404).json({
+                return res.status(404).json({
                     error: "User not found"
                 })
-                return;
             }
 
             if(await comparePassword(password, user.password)){
@@ -50,17 +48,16 @@ export class UsersController extends BaseController<User>{
         try{
             let body = req.body;
             if(!body){
-                res.status(400).json({
+                return res.status(400).json({
                     error: "property body is required"
                 })
-                return;
             }
 
             const { email, password } = body;
 
             const oldUser = await this.service.findByEmail(email);
             if (oldUser) {
-                return res.status(409).send("User Already Exist. Please Login");
+                return res.status(400).send("User Already Exist. Please Login");
             }
 
             if(!password || !validatePassword(password)){
@@ -69,10 +66,10 @@ export class UsersController extends BaseController<User>{
 
             body.password = await hashPassword(password);
             let data = (await this.service.create(body)) ? true : false;
-            res.status(201).json({ message: data ? "created": "not created", success: data });
+            return res.status(200).json(data ? "created": "not created");
         }
         catch(error){
-            res.status(500).json(error)
+            return res.status(500).json(error)
         }
     }
 

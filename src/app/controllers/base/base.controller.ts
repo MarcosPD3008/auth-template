@@ -14,7 +14,7 @@ export default abstract class BaseController<T>{
             return res.status(200).json(data);
         }
         catch(error){
-            res.status(500).json(error)
+            return res.status(500).json(error)
         }
     }
 
@@ -27,10 +27,10 @@ export default abstract class BaseController<T>{
                 })
 
             let data = await this.service.findOne(new mongoose.Types.ObjectId(id));
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch(error){
-            res.status(500).json(error)
+            return res.status(500).json(error)
         }
     }
 
@@ -46,13 +46,13 @@ export default abstract class BaseController<T>{
                        ? true 
                        : false;
 
-            res.status(201).json({ 
+            return res.status(201).json({ 
                 message: data ? "created": "not created", 
                 success: data 
             });
         }
         catch(error){
-            res.status(500).json(error)
+            return res.status(500).json(error)
         }
     }
 
@@ -74,13 +74,13 @@ export default abstract class BaseController<T>{
                            ? true 
                            : false;
 
-            res.status(200).json({
+            return res.status(200).json({
                 message: response ? "updated" : "not updated", 
                 success: response
             });
         }
         catch(error){
-            res.status(500).json(error)
+            return res.status(500).json(error)
         }
     }
 
@@ -96,13 +96,13 @@ export default abstract class BaseController<T>{
                        ? true 
                        : false;
 
-            res.status(200).json({ 
+            return res.status(200).json({ 
                 message: data ? "deleted": "not deleted", 
                 success: data 
             });
         }
         catch(error){
-            res.status(500).json(error)
+            return res.status(500).json(error)
         }
     }
 }

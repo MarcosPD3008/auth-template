@@ -33,7 +33,6 @@ export default class ServerApp {
 
     runServer() {
         let server = this.app.listen(this.port, () => {  console.log(`Server running on port ${this.port}`) });
-        console.log("timeout", this.timeout);
         server.setTimeout(this.timeout); 
     } 
 
